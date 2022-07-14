@@ -90,3 +90,23 @@ class AlterPasswordView(APIView):
             
             except:
                 return Response({"message": "존재하지 않는 사용자입니다."}, status=status.HTTP_404_NOT_FOUND)
+            
+    # 비밀번호 변경
+    def put(self, request):
+        """
+        1. 사용자의 정보를 그대로 가져온다. 
+        2. 새롭게 세팅할 비밀번호와 중복 확인용 비밀번호를 받는다. 
+        3. 이 두 비밀번호가 정규표현식을 통과하고 일치한다면, UserSerializer에 request.data를 보내 custom updator를 통해 비밀번호를 update해준다.
+        """
+    
+        if request.data["new_password"] == "" or request.data["rewrite_password"] == "":
+            return Response({"message": "비밀번호를 제대로 입력해주세요."}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            if request.data["new_password"] == request.data["rewrite_password"]:
+                user = UserModel.objects.get(Q(username=request.data["username"]) & Q(email=request.data["email"]))
+                user.set_password(request.data["new_password"])
+                user.save()
+            
+                return Response({"message": "비밀번호 변경이 완료되었습니다! 다시 로그인해주세요."}, status=status.HTTP_200_OK)
+            
+            return Response({"message": "두 비밀번호가 일치하지 않습니다."})
