@@ -144,3 +144,17 @@ class AlterPasswordTest(APITestCase):
         response = self.client.post(url, user_data)
         
         self.assertEqual(response.data["message"], "비밀번호 변경 페이지로 이동합니다.")
+        
+    # 비밀번호 변경    
+    def test_alter_password(self):
+        url = reverse("alter_password_view")
+        password_data = {
+            "username" : "user10",
+            "email" : "user10@gmail.com",
+            "new_password" : "abcde10!",
+            "rewrite_password" : "abcde10!"
+        }
+
+        response = self.client.put(url, password_data)
+
+        self.assertEqual(response.data["message"], "비밀번호 변경이 완료되었습니다! 다시 로그인해주세요.")
