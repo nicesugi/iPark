@@ -91,3 +91,29 @@ class UserInfoModifyDeleteTest(APITestCase):
         response = self.client.delete(url, HTTP_AUTHORIZATION=f"Bearer {self.access_token}")
         
         self.assertEqual(response.data["message"], "회원탈퇴 성공")
+        
+
+# 아이디 찾기 테스트
+class SearchUsernameTest(APITestCase):
+    @classmethod
+    def setUpTestData(cls):
+        user_data = {
+            "username" : "user10",
+            "password" : "1010abc!",
+            "fullname" : "user10",
+            "email" : "user10@gmail.com",
+            "phone" : "010-1010-1010",
+            "birthday" : "2022-07-13",
+        }
+        cls.user = UserModel.objects.create(**user_data)
+        
+    def test_search_username(self):
+        url = reverse("myid_view")
+        data = {
+            "email" : "user10@gmail.com",
+            "phone" : "010-1010-1010"
+        }
+        
+        response = self.client.post(url, data)
+        
+        self.assertEqual(response.data["username"], "user10")
