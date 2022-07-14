@@ -36,7 +36,8 @@ class CommunityView(APIView):
 class CommunityDetailView(APIView):
     def get(self, request, article_id):
         article = ArticleModel.objects.get(id=article_id)
-        serialized_data = ArticleSerializer(article, many=True).data
+        article.update_counter
+        serialized_data = ArticleSerializer(article).data
         
         return Response(serialized_data, status=status.HTTP_200_OK)  
 
