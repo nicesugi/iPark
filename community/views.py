@@ -21,8 +21,9 @@ class CommunityView(APIView):
             return Response(serialized_data, status=status.HTTP_200_OK)
 
     def post(self, request):
-        request.data["user"] = request.user.id
-        article_serializer = ArticleSerializer(data=request.data)
+        data = request.dict()
+        data["user"] = request.user.id
+        article_serializer = ArticleCommentSerializer(data=data)
 
         if article_serializer.is_valid():
             article_serializer.save()
