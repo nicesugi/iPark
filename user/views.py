@@ -65,3 +65,28 @@ class FindUserInfoView(APIView):
                 
             except UserModel.DoesNotExist:
                 return Response({"message": "사용자가 존재하지 않습니다"}, status=status.HTTP_404_NOT_FOUND)
+            
+
+class AlterPasswordView(APIView):
+    # 비밀번호를 변경할 자격이 있는지 확인
+    def post(self, request):
+        """
+        1. 비밀번호를 변경할 사용자의 username, email을 입력받는다.
+        2. 해당 값을 통해 비밀번호를 변경할 user를 찾아준다. 
+        3. 만약 user가 존재한다면 user 정보를 비밀번호 수정 페이지에서도 알 수 있도록 넘겨준다.
+        4. user가 존재하지 않는다면 "존재하지 않는 사용자입니다." 라는 메세지를 반환한다.
+        """
+        
+        correct_email = re.compile("^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
+        email_input = correct_email.match(request.data["email"])
+        
+        if email_input == None:
+            return Response({"message": "이메일 형식에 맞게 작성해주세요."})
+        else:
+            try: 
+                user = UserModel.objects.get(Q(username=request.data["username"]) & Q(email=request.data["email"]))
+                if user:
+                    return Response({"message": "비밀번호 변경 페이지로 이동합니다."}, status=status.HTTP_200_OK)
+            
+            except:
+                return Response({"message": "존재하지 않는 사용자입니다."}, status=status.HTTP_404_NOT_FOUND)
