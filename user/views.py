@@ -33,3 +33,12 @@ class UserView(APIView):
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+    # 회원탈퇴
+    def delete(self, request):
+        user = request.user
+        
+        if user:
+            user.delete()
+            return Response({"message": "회원탈퇴 성공"}, status=status.HTTP_200_OK)
+        
+        return Response({"message": "회원탈퇴 실패"}, status=status.HTTP_400_BAD_REQUEST)
