@@ -30,4 +30,47 @@ class CommunityView(APIView):
         if article_serializer.is_valid():
             article_serializer.save()
             return Response(article_serializer, status=status.HTTP_200_OK)
-        return Response(article_serializer, status=status.HTTP_400_BAD_REQUEST)
+        
+        return Response({"mseeage": "게시글 작성 실패 !"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CommentView(APIView):
+    def get(self, request, article_id):
+        aritcle = ArticleCommentModel.objects.filter(article_id=article_id)
+        serialized_data = ArticleCommentSerializer(aritcle, many=True).data
+
+        return Response(serialized_data, status=status.HTTP_200_OK)
+
+    def post(self, request, article_id):
+        article = ArticleModel.objects.get(id=article_id)
+
+        data = {
+            "user": request.user.id,
+            "article": article.id,
+            "comment": request.data["comment"]
+        }
+
+        article_serializer = ArticleCommentSerializer(data=data)
+        if article_serializer.is_valid():
+            article_serializer.save()
+            return Response({"message": "댓글작성 완료!"}, status=status.HTTP_200_OK)
+
+    def put(self, request, comment_id):
+        comment = ArticleCommentModel.objects.get(id=comment_id)
+        comment_serializer = ArticleCommentSerializer(comment, data=request.data, partial=True)
+
+        if comment_serializer.is_valid():
+            comment_serializer.save()
+            return Response({"message": "수정완료!"}, status=status.HTTP_200_OK)
+
+        return Response({"message": "수정할수 없는 댓글"}, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, comment_id):
+        user = request.user.id
+        comment = ArticleCommentModel.objects.get(id=comment_id)
+
+        if comment.user.id == user:
+            comment.delete()
+            return Response({"message": "삭제완료!"}, status=status.HTTP_200_OK)
+
+        return Response({"message": "삭제할수 없는 댓글"}, status=status.HTTP_400_BAD_REQUEST)
