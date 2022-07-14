@@ -49,3 +49,38 @@ class UserLoginTest(APITestCase):
         
         self.assertEqual(response.status_code, 200)
         
+        
+# 회원정보 수정 및 회원탈퇴 테스트
+class UserInfoModifyDeleteTest(APITestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.region = RegionModel.objects.bulk_create([RegionModel(region_name="강남구"),
+                                                      RegionModel(region_name="강동구"),
+                                                      RegionModel(region_name="강북구")])
+        
+        cls.user = UserModel.objects.create_user("user10", "1010abc!")
+        cls.login_data = {"username": "user10", "password" : "1010abc!"}
+        
+    def setUp(self):
+        self.access_token = self.client.post(reverse("token_obtain_pair"), self.login_data).data["access"]
+    
+    # 회원정보 수정 테스트
+    def test_modify_user_info(self):
+        url = reverse("user_view")
+        data_for_change = {
+            "password" : "2020abc!",
+            "fullname" : "user20",
+            "email" : "user20@gmail.com",
+            "phone" : "010-1010-1010",
+            "birthday" : "2022-07-13",
+            "region" : 3
+        }
+        
+        response = self.client.put(
+            path=url, 
+            data=data_for_change,
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}"
+        )
+        
+        self.assertEqual(response.status_code, 200)
+    
