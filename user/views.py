@@ -88,7 +88,7 @@ class AlterPasswordView(APIView):
                 if user:
                     return Response({"message": "비밀번호 변경 페이지로 이동합니다."}, status=status.HTTP_200_OK)
             
-            except:
+            except UserModel.DoesNotExist:
                 return Response({"message": "존재하지 않는 사용자입니다."}, status=status.HTTP_404_NOT_FOUND)
             
     # 비밀번호 변경
