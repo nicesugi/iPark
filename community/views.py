@@ -8,9 +8,13 @@ from community.serializers import ArticleCommentSerializer
 from community.models import Article as ArticleModel
 from community.models import ArticleComment as ArticleCommentModel
 
+from rest_framework_simplejwt.authentication import JWTAuthentication
+
 
 #게시글 전체 페이지
 class CommunityView(APIView):
+    authentication_classes = [JWTAuthentication]
+    
     def get(self, request):
         id = int(request.GET["id"])
         user = request.user.id
@@ -36,7 +40,7 @@ class CommunityView(APIView):
             article_serializer.save()
             return Response(article_serializer.data, status=status.HTTP_200_OK)
         
-        return Response({"mseeage": "게시글 작성 실패 !"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(article_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 #게시글 상세 페이지
