@@ -11,28 +11,41 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('park', '0001_initial'),
+        ("park", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='parkcomment',
-            name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='작성자'),
+            model_name="parkcomment",
+            name="user",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="작성자",
+            ),
         ),
         migrations.AddField(
-            model_name='park',
-            name='option',
-            field=models.ManyToManyField(related_name='options', through='park.ParkOption', to='park.option', verbose_name='공원 옵션'),
+            model_name="park",
+            name="option",
+            field=models.ManyToManyField(
+                related_name="options",
+                through="park.ParkOption",
+                to="park.option",
+                verbose_name="공원 옵션",
+            ),
         ),
         migrations.AddField(
-            model_name='bookmark',
-            name='park',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='park.park'),
+            model_name="bookmark",
+            name="park",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="park.park"
+            ),
         ),
         migrations.AddField(
-            model_name='bookmark',
-            name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="bookmark",
+            name="user",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL
+            ),
         ),
     ]

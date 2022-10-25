@@ -11,29 +11,45 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('community', '0001_initial'),
-        ('park', '0001_initial'),
+        ("community", "0001_initial"),
+        ("park", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='articlecomment',
-            name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='작성자'),
+            model_name="articlecomment",
+            name="user",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="작성자",
+            ),
         ),
         migrations.AddField(
-            model_name='article',
-            name='park',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='park.park', verbose_name='공원 이름'),
+            model_name="article",
+            name="park",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="park.park",
+                verbose_name="공원 이름",
+            ),
         ),
         migrations.AddField(
-            model_name='article',
-            name='tag',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='community.tag', verbose_name='태그'),
+            model_name="article",
+            name="tag",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="community.tag",
+                verbose_name="태그",
+            ),
         ),
         migrations.AddField(
-            model_name='article',
-            name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='작성자'),
+            model_name="article",
+            name="user",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="작성자",
+            ),
         ),
     ]

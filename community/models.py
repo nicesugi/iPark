@@ -8,7 +8,9 @@ TAG_CHOICES = [
 
 
 class Tag(models.Model):
-    tag_name = models.CharField("태그", max_length=10, choices=TAG_CHOICES, default="community")
+    tag_name = models.CharField(
+        "태그", max_length=10, choices=TAG_CHOICES, default="community"
+    )
 
     def __str__(self):
         return self.tag_name
@@ -17,7 +19,9 @@ class Tag(models.Model):
 class Article(models.Model):
     user = models.ForeignKey("user.User", verbose_name="작성자", on_delete=models.CASCADE)
     tag = models.ForeignKey(Tag, verbose_name="태그", on_delete=models.CASCADE)
-    park = models.ForeignKey("park.Park", verbose_name="공원 이름", on_delete=models.CASCADE)
+    park = models.ForeignKey(
+        "park.Park", verbose_name="공원 이름", on_delete=models.CASCADE
+    )
     image = models.ImageField("이미지", blank=True)
     title = models.CharField("제목", max_length=35)
     content = models.TextField("내용", max_length=400)

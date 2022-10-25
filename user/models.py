@@ -12,12 +12,9 @@ class UserManager(BaseUserManager):
         user.set_password(password)
         user.save(using=self._db)
         return user
-        
+
     def create_superuser(self, username, password=None):
-        user = self.create_user(
-            username=username,
-            password=password
-        )
+        user = self.create_user(username=username, password=password)
         user.is_admin = True
         user.save(using=self._db)
         return user
@@ -31,13 +28,17 @@ class Region(models.Model):
 
 
 class User(AbstractBaseUser):
-    bookmarks = models.ManyToManyField("park.Park", verbose_name="즐겨찾기", related_name="users", through="park.BookMark")
+    bookmarks = models.ManyToManyField(
+        "park.Park", verbose_name="즐겨찾기", related_name="users", through="park.BookMark"
+    )
     username = models.CharField("사용자 계정", max_length=30, unique=True)
     password = models.CharField("비밀번호", max_length=128)
     fullname = models.CharField("사용자 이름", max_length=20)
     email = models.EmailField("이메일", max_length=100, unique=True)
     phone = models.CharField("핸드폰 번호", max_length=20)
-    region = models.ForeignKey(Region, verbose_name="지역", on_delete=models.SET_NULL, null=True)
+    region = models.ForeignKey(
+        Region, verbose_name="지역", on_delete=models.SET_NULL, null=True
+    )
     join_date = models.DateTimeField("가입일자", auto_now_add=True)
 
     is_active = models.BooleanField(default=True)
@@ -47,14 +48,14 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = []
 
     objects = UserManager()
-    
+
     def __str__(self):
         return self.username
 
     def has_perm(self, perm, obj=None):
         return True
-    
-    def has_module_perms(self, app_label): 
+
+    def has_module_perms(self, app_label):
         return True
 
     @property
