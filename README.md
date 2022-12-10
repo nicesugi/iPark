@@ -1,12 +1,11 @@
-# iPark &nbsp;&nbsp;|&nbsp;&nbsp; 22년 7월 7일 - 22년 8월 16일 (1주)
+# iPark
 
 ### 서비스 소개 </br>
 
-<details>
+<details open>
 <summary>
 서울시 공원들을 소개해주고 공원을 중심으로 지역 커뮤니티를 구성하는 서비스입니다.
 </summary>
-</br>
 
 ### 
 
@@ -115,7 +114,7 @@ Infra : <img src="https://img.shields.io/badge/Gunicorn-499848?style=flat-square
 <br>
 
 ## 기능 명세서
-<details>
+<details open>
 <summary> 메인페이지 </summary>
 <pre>
 - 상단바
@@ -136,7 +135,7 @@ Infra : <img src="https://img.shields.io/badge/Gunicorn-499848?style=flat-square
 </pre>
 </details>
 
-<details>
+<details open>
 <summary> 로그인 페이지 </summary>
 <pre>
 - 로그인
@@ -162,7 +161,7 @@ Infra : <img src="https://img.shields.io/badge/Gunicorn-499848?style=flat-square
 </pre>
 </details>
 
-<details>
+<details open>
 <summary> 회원가입 페이지 </summary>
 <pre>
 - 회원가입
@@ -180,7 +179,7 @@ Infra : <img src="https://img.shields.io/badge/Gunicorn-499848?style=flat-square
 </pre>
 </details>
 
-<details>
+<details open>
 <summary> 공원 검색 페이지 </summary>
 <pre>
 - 공원 옵션
@@ -197,7 +196,7 @@ Infra : <img src="https://img.shields.io/badge/Gunicorn-499848?style=flat-square
 </pre>
 </details>
 
-<details>
+<details open>
 <summary> 공원 상세 내용 페이지 </summary>
 <pre>
 - 공원 상세 정보
@@ -215,7 +214,7 @@ Infra : <img src="https://img.shields.io/badge/Gunicorn-499848?style=flat-square
 </pre>
 </details>
 
-<details>
+<details open>
 <summary> 즐겨찾기 페이지 </summary>
 <pre>
 - 사용자가 즐겨찾기한 공원들을 최신순으로 정렬
@@ -224,7 +223,7 @@ Infra : <img src="https://img.shields.io/badge/Gunicorn-499848?style=flat-square
 </pre>
 </details>
 
-<details>
+<details open>
 <summary> 커뮤니티 페이지 </summary>
 <pre>
 - 첫 페이지는 전체 게시글로, 모든 사용자들이 작성한 게시글을 보여줌
@@ -238,7 +237,7 @@ Infra : <img src="https://img.shields.io/badge/Gunicorn-499848?style=flat-square
 </pre>
 </details>
 
-<details>
+<details open>
 <summary> 게시글 업로드 페이지 </summary>
 <pre>
 - 태그 [ 커뮤니티 or 나눔마켓 ]를 선택
@@ -249,7 +248,7 @@ Infra : <img src="https://img.shields.io/badge/Gunicorn-499848?style=flat-square
 </pre>
 </details>
 
-<details>
+<details open>
 <summary> 게시글 상세페이지 </summary>
 <pre>
 - 게시글에 대한 내용을 확인
@@ -266,25 +265,17 @@ Infra : <img src="https://img.shields.io/badge/Gunicorn-499848?style=flat-square
 <br>
 
 ## 데이터베이스 ERD
-<details>
-<summary> Click ! </summary>
-&nbsp;&nbsp;
-<pre>
+
 <img width="1242" alt="ipark" src="https://user-images.githubusercontent.com/104303285/185301146-12508b43-dd0f-4bd1-afa1-5666f2fab8ea.png">
-</pre>
-</details>
+
 
 <br>
 
 ## API 설계
-<details>
-<summary> Click ! </summary>
-&nbsp;&nbsp;
-<pre>
+
 <img width="959" alt="스크린샷 2022-08-18 오후 1 13 48" src="https://user-images.githubusercontent.com/99387514/185292781-29cb132d-5042-4c6a-a6c9-97a42363df09.png">
 
 <img width="946" alt="스크린샷 2022-08-18 오후 1 19 53" src="https://user-images.githubusercontent.com/99387514/185292957-a321a78f-35e2-415e-898a-319c8ec9ca49.png">
 
 <img width="927" alt="스크린샷 2022-08-18 오후 1 20 09" src="https://user-images.githubusercontent.com/99387514/185292976-b68e1ae6-630c-4bcf-a510-47db46ccd59e.png">
-</pre>
-</details>
+
