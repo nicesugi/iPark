@@ -24,7 +24,6 @@
 
 </details>
 
-서비스 사이트 >> https://www.ilovepark.net/
 
 
 ### 목차
